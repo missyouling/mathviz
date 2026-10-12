@@ -27,7 +27,7 @@ export default function NarrationController() {
   const speedOptions = [0.75, 1, 1.25, 1.5]
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white shadow-2xl border-t border-slate-700/50">
+    <div className="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white shadow-2xl border-t border-slate-700/50 pb-[env(safe-area-inset-bottom)]">
       {/* 字幕区域 */}
       <div className="px-4 py-2 bg-black/20 border-b border-slate-700/30">
         <p className="text-center text-sm md:text-base text-slate-200 truncate max-w-4xl mx-auto">

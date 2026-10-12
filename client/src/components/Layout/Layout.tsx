@@ -22,7 +22,7 @@ function LayoutContent() {
   return (
     <div className="flex h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
       {/* 移动端顶部导航栏 */}
-      <header className="fixed top-0 left-0 right-0 z-40 md:hidden bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white shadow-lg">
+      <header className="fixed top-0 left-0 right-0 z-40 md:hidden bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white shadow-lg pt-[env(safe-area-inset-top)]">
         <div className="flex items-center px-4 py-3 gap-3">
           {isExperimentPage ? (
             <button
@@ -66,7 +66,7 @@ function LayoutContent() {
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       {/* 主内容区 */}
-      <main className={`flex-1 overflow-auto md:ml-0 pt-14 md:pt-0 transition-all duration-300 ${isNarrationMode ? 'pb-20' : ''}`}>
+      <main className={`flex-1 overflow-auto md:ml-0 pt-[calc(3.5rem+env(safe-area-inset-top))] md:pt-0 transition-all duration-300 ${isNarrationMode ? 'pb-20' : ''}`}>
         <div className="min-h-full p-4 md:p-8 flex flex-col">
           <div className="animate-fade-in flex-1">
             <Outlet />

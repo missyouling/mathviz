@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 interface SliderParam {
   key: string
   label: string
@@ -16,6 +18,8 @@ interface ParameterPanelProps {
 }
 
 export default function ParameterPanel({ title, params, onChange, className = '' }: ParameterPanelProps) {
+  // 移动端默认折叠参数列表，节省首屏空间；桌面端保持展开
+  const [collapsed, setCollapsed] = useState(false)
   return (
     <div className={`bg-white rounded-2xl shadow-lg shadow-slate-200/50 border border-slate-200/50 overflow-hidden transition-all duration-300 ${className}`}>
       {/* 标题栏 */}
@@ -26,12 +30,25 @@ export default function ParameterPanel({ title, params, onChange, className = ''
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
             </svg>
           </div>
-          <h3 className="text-lg font-bold text-slate-800">{title}</h3>
+          <h3 className="text-lg font-bold text-slate-800 flex-1">{title}</h3>
+          {/* 移动端折叠按钮 */}
+          <button
+            onClick={() => setCollapsed(!collapsed)}
+            className="md:hidden p-2 -mr-2 rounded-lg text-slate-500 hover:bg-slate-100 transition-colors"
+            aria-label={collapsed ? '展开参数' : '折叠参数'}
+          >
+            <svg
+              className={`w-5 h-5 transition-transform duration-300 ${collapsed ? '' : 'rotate-180'}`}
+              fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
         </div>
       </div>
 
-      {/* 参数列表 */}
-      <div className="p-5 space-y-5">
+      {/* 参数列表（移动端可折叠） */}
+      <div className={`p-5 space-y-5 ${collapsed ? 'hidden md:block' : ''}`}>
         {params.map((param) => {
           const percentage = ((param.value - param.min) / (param.max - param.min)) * 100
 
